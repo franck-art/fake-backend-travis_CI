@@ -1,0 +1,21 @@
+sudo: 'required'
+
+services:
+  - 'docker'
+
+before_install:
+  - './.travis/main.sh'
+  - 'make reseau'
+  - 'make volume'
+script:
+  - 'make image'
+  - 'make run_backend'
+  - 'make run_frontend'
+  - 'make test'
+
+after_success:
+  - 'make clean'
+  - if [[ "$TRAVIS_BRANCH" == 'master' ]]; then
+       docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+       make push-image ;
+     fi
