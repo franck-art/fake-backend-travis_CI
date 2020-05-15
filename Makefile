@@ -21,7 +21,7 @@ image:
 
 run_backend:
 	docker run --name dbgame -v $(vol_data):/var/lib/mysql  -e  MYSQL_ROOT_PASSWORD=rootpwdgame -e  MYSQL_DATABASE=battleboat -e MYSQL_USER=battleuser -e  MYSQL_PASSWORD=battlepass --network $(network) -d mysql:5.7
-	docker ps
+	
 
 
 run_frontend: 
@@ -32,7 +32,7 @@ run_frontend:
 
 test:
 
-	if [ $(con) = 200 ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(con)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
 
 
 clean:
