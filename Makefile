@@ -9,10 +9,10 @@ vol_data = mysql_data
 # Regles
 
 reseau: 
-	docker create network $(network)
+	docker network create  $(network)
 
 volume:
-	docker create volume $(vol_data)
+	docker volume create $(vol_data)
 
 
 image:
