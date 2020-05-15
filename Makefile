@@ -20,12 +20,12 @@ image:
 
 
 run_backend:
-	docker run --name dbgame -v $(vol_data):/var/lib/mysql  -e  MYSQL_ROOT_PASSWORD= rootpwdgame -e  MYSQL_DATABASE=  battleboat -e MYSQL_USER= battleuser -e  MYSQL_PASSWORD= 'battlepass --network $(network)  $(IMAGE)
+	docker run --name dbgame -v $(vol_data):/var/lib/mysql  -e  MYSQL_ROOT_PASSWORD= 'rootpwdgame' -e  MYSQL_DATABASE= 'battleboat' -e MYSQL_USER= 'battleuser' -e  MYSQL_PASSWORD= 'battlepass' --network $(network) -d  $(IMAGE)
 
 
 
 run_frontend: 
-	docker run --name battlegame -v $(pwd)/battleboat:/etc/backend/static -p 80:3000 -e  DATABASE_HOST= dbgame -e  DATABASE_PORT= 3306 -e  DATABASE_USER= battleuser -e DATABASE_PASSWORD= battlepass -e DATABASE_NAME=  battleboat --network $(network) $(IMAGE) 
+	docker run --name battlegame -v $(pwd)/battleboat:/etc/backend/static -p 80:3000 -e  DATABASE_HOST= 'dbgame' -e  DATABASE_PORT= '3306' -e  DATABASE_USER= 'battleuser' -e DATABASE_PASSWORD= 'battlepass' -e DATABASE_NAME= 'battleboat' --network $(network) -d  $(IMAGE) 
 
        # To let the container start before run test
 	sleep 5
