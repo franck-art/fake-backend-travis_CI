@@ -25,14 +25,14 @@ run_backend:
 
 
 run_frontend: 
-	docker run --name battlegame -v ${PWD}/battleboat:/etc/backend/static -p 80:3000 -e  DATABASE_HOST=dbgame -e  DATABASE_PORT=3306 -e  DATABASE_USER=battleuser -e DATABASE_PASSWORD=battlepass -e DATABASE_NAME=battleboat --network $(network) -d  $(IMAGE) 
+	docker run --name battlegame -v ${PWD}/battleboat:/etc/backend/static -p 3000:3000 -e  DATABASE_HOST=dbgame -e  DATABASE_PORT=3306 -e  DATABASE_USER=battleuser -e DATABASE_PASSWORD=battlepass -e DATABASE_NAME=battleboat --network $(network) -d  $(IMAGE) 
 
        # To let the container start before run test
 	sleep 5
 
 test:
 
-	if [ "$$(curl -I  localhost | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = 200 ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -I  http://127.0.0.1:3000 | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = 200 ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
 
 
 clean:
