@@ -32,7 +32,7 @@ run_frontend:
 
 test:
 
-	if [ "$(curl -I  localhost | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -I  localhost | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = 200 ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
 
 
 clean:
