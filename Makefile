@@ -32,7 +32,7 @@ run_frontend:
 
 test:
 
-	if [ "$$(con)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -I  http://127.0.0.1:3000 | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
 
 
 clean:
