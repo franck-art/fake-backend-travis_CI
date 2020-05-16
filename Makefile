@@ -29,14 +29,14 @@ run_frontend:
 	docker ps
 	ip add
 	
-	curl http://localhost:80
+	
        # To let the container start before run test
 	sleep 5
 
 test:
 
-	if [ "$$(curl -I  http://localhost:80 | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
-
+	curl http://localhost:80
+	curl http://localhost:80/health
 
 clean:
 	docker rm -vf  battlegame dbgame
