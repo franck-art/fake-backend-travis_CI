@@ -29,7 +29,7 @@ run_frontend:
 	docker ps
 	ip add
 	
-	curl http://localhost:3000
+	curl http://172.17.0.1:3000
        # To let the container start before run test
 	sleep 5
 
