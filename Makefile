@@ -31,13 +31,13 @@ run_frontend:
 	sudo iptables -L
 	sudo iptables -A OUTPUT -s localhost -p tcp --dport 80 -j ACCEPT
 	sudo iptables -A INPUT -d localhost -p tcp  --dport 80 -j ACCEPT
-	curl http://localhost:80
+	curl http://172.31.39.64:80
        # To let the container start before run test
 	sleep 5
 
 test:
 
-	if [ "$$(curl -I  http://127.0.0.1:80 | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -I  http://172.31.39.64:80 | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
 
 
 clean:
