@@ -29,13 +29,13 @@ run_frontend:
 	docker ps
 	ip add
 	
-	curl http://172.17.0.1:3000
+	curl http://localhost:3000
        # To let the container start before run test
 	sleep 5
 
 test:
 
-	if [ "$$(curl -I  http://172.17.0.1:3000 | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -I  http://localhost:3000 | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
 
 
 clean:
