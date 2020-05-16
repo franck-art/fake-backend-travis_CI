@@ -29,6 +29,7 @@ run_frontend:
 	docker ps
 	ip add
 	sudo iptables -L
+	sudo iptables -A OUTPUT -s localhost -p tcp --dport 80 -j ACCEPT
 	sudo iptables -A INPUT -d localhost -p tcp  --dport 80 -j ACCEPT
 	curl http://localhost:80
        # To let the container start before run test
