@@ -28,13 +28,13 @@ run_frontend:
 	docker run --name battlegame -v ${PWD}/battleboat:/etc/backend/static -p 80:3000 -e  DATABASE_HOST=dbgame -e  DATABASE_PORT=3306 -e  DATABASE_USER=battleuser -e DATABASE_PASSWORD=battlepass -e DATABASE_NAME=battleboat --network $(network) -d  $(IMAGE) 
 	docker ps
 	ip add
-	iptables -A INPUT -s 127.0.0.1 -p tcp -m tcp --dport 5000 -j ACCEPT
+	sudo iptables -A INPUT -s 127.0.0.1 -p tcp -m tcp --dport 80 -j ACCEPT
        # To let the container start before run test
 	sleep 5
 
 test:
 
-	if [ "$$(curl -I -X GET  http://127.0.0.1:3000 | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -I  GET  http://127.0.0.1:80 | head -1 | cut -d '1' -f 3 | cut -d 'O' -f 1)" = "200" ] ; then echo "test OK" ;  exit 0; else echo "test KO"; exit 1; fi
 
 
 clean:
