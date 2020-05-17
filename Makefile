@@ -35,8 +35,9 @@ run_frontend:
 
 test:
 
-	curl http://localhost:80
-	curl http://localhost:80/health
+#	curl http://localhost:80
+#	curl http://localhost:80/health
+	echo "fin test"
 
 clean:
 	docker rm -vf  battlegame dbgame
