@@ -3,16 +3,14 @@
 # declaration de variables
 
 IMAGE =  franckjunior/fake-backend:travis
-network = network_game
-vol_data = mysql_data
 
 # Regles
 
 reseau: 
-	docker network create  $(network)
+	docker network create  network_game
 
 volume:
-	docker volume create $(vol_data)
+	docker volume create mysql_data
 
 
 image:
@@ -20,8 +18,8 @@ image:
 
 
 run:
-	docker run --name=dbgame -v $(vol_data):/var/lib/mysql  -e  MYSQL_ROOT_PASSWORD=rootpwdgame -e  MYSQL_DATABASE=battleboat -e MYSQL_USER=battleuser -e  MYSQL_PASSWORD=battlepass --network $(network) -d mysql:5.7
-	docker run --name=battlegame -v ${PWD}/battleboat:/etc/backend/static -p 80:3000 -e  DATABASE_HOST=dbgame -e  DATABASE_PORT=3306 -e  DATABASE_USER=battleuser -e DATABASE_PASSWORD=battlepass -e DATABASE_NAME=battleboat --network $(network) -d  $(IMAGE)
+	docker run --name=dbgame -v mysql_data:/var/lib/mysql  -e  MYSQL_ROOT_PASSWORD=rootpwdgame -e  MYSQL_DATABASE=battleboat -e MYSQL_USER=battleuser -e  MYSQL_PASSWORD=battlepass --network network_game -d mysql:5.7
+	docker run --name=battlegame -v ${PWD}/battleboat:/etc/backend/static -p 80:3000 -e  DATABASE_HOST=dbgame -e  DATABASE_PORT=3306 -e  DATABASE_USER=battleuser -e DATABASE_PASSWORD=battlepass -e DATABASE_NAME=battleboat --network network_game -d  $(IMAGE)
 
         # To let the container start before run test
 	sleep 5
