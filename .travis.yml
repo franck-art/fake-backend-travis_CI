@@ -9,9 +9,7 @@ before_install:
   - 'make volume'
 script:
   - 'make image'
-  - 'make run_backend'
-  - 'make run_frontend'
-  - 'docker ps'
+  - 'make run'
   - 'make test'
 
 after_success:
