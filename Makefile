@@ -25,7 +25,7 @@ run:
 
         # To let the container start before run test
 	sleep 5
-	docker ps
+	docker ps -a
 test:
 
 	curl http://localhost:80
@@ -39,4 +39,4 @@ clean:
 push-image:
 	docker push $(IMAGE)
 
-.PHONY: volume reseau image run_backend run_frontend test clean push-image
+.PHONY: volume reseau image run  test clean push-image
