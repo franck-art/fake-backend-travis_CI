@@ -37,4 +37,4 @@ clean:
 push-image:
 	docker push $(IMAGE)
 
-.PHONY: volume reseau image run  test clean push-image
+.PHONY: volume reseau image run test clean push-image
