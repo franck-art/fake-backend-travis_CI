@@ -19,15 +19,14 @@ image:
 
 run:
 	docker run --name=dbgame -v mysql_data:/var/lib/mysql  -e  MYSQL_ROOT_PASSWORD=rootpwdgame -e  MYSQL_DATABASE=battleboat -e MYSQL_USER=battleuser -e  MYSQL_PASSWORD=battlepass --network network_game -d mysql:5.7
-	docker run --name=battlegame -v ${PWD}/battleboat:/etc/backend/static -p 80:3000 -e  DATABASE_HOST=dbgame -e  DATABASE_PORT=3306 -e  DATABASE_USER=battleuser -e DATABASE_PASSWORD=battlepass -e DATABASE_NAME=battleboat --network network_game -d  $(IMAGE)
+	docker run --name=battlegame -v ${PWD}/battleboat:/etc/backend/static -p 80:3000 -e  DATABASE_HOST=dbgame -e  DATABASE_PORT=3306 -e  DATABASE_USER=battleuser -e DATABASE_PASSWORD=battlepass -e DATABASE_NAME=battleboat --link battlegame:dbgame --network network_game -d  $(IMAGE)
 
         # To let the container start before run test
 	sleep 5
-	docker ps -a
+	docker ps 
 test:
 
-	curl http://localhost:80
-#	curl http://localhost:80/health
+	if [ "$$(curl  -X GET http://localhost:80/health)" == "200" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
 	echo "fin test"
 
 clean:
