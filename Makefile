@@ -26,7 +26,7 @@ run:
 	docker ps 
 test:
 
-	if [ "$(curl -X GET http://127.0.0.1:8282/health)" = "200" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -X GET http://127.0.0.1:8282/health)" = "200" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
 	echo "fin test"
 
 clean:
