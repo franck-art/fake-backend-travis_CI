@@ -18,15 +18,16 @@ image:
 
 
 run:
-	docker run --name dbgame -v mysql_data:/var/lib/mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=rootpwdgame -e  MYSQL_DATABASE=battleboat -e MYSQL_USER=battleuser -e  MYSQL_PASSWORD=battlepass --network network_game -d mysql:5.7
-	docker run --name battlegame -v ${PWD}/battleboat:/etc/backend/static -p 8282:3000 -e  DATABASE_HOST=dbgame -e  DATABASE_PORT=3306 -e  DATABASE_USER=battleuser -e DATABASE_PASSWORD=battlepass -e DATABASE_NAME=battleboat  --network network_game -d  $(IMAGE)
+	docker run --name dbgame -d -v mysql_data:/var/lib/mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=rootpwdgame -e  MYSQL_DATABASE=battleboat -e MYSQL_USER=battleuser -e  MYSQL_PASSWORD=battlepass --network network_game  mysql:5.7
+	sleep 3s
+	docker run --name battlegame -d -v ${PWD}/battleboat:/etc/backend/static -p 3000:3000 -e  DATABASE_HOST=dbgame -e  DATABASE_PORT=3306 -e  DATABASE_USER=battleuser -e DATABASE_PASSWORD=battlepass -e DATABASE_NAME=battleboat  --network network_game   $(IMAGE)
 
         # To let the container start before run test
-	sleep 5
+	sleep 5s
 	docker ps 
 test:
 
-	if [ "$$(curl -X GET http://127.0.0.1:8282/health)" = "200" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -X GET http://127.0.0.1:3000/health)" = "200" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
 	echo "fin test"
 
 clean:
