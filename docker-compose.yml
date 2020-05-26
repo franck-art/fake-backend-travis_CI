@@ -16,7 +16,7 @@ services:
  
   battlegame:
     container_name: battlegame
-    image: fake-backend
+    image: franckjunior/fake-backend:travis
     volumes:
       - ./battleboat:/etc/backend/static
     depends_on:
