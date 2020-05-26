@@ -4,7 +4,7 @@ services:
     container_name: dbgame
     image: mysql:5.7
     volumes:
-      - mysql_config:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpwdgame
       MYSQL_DATABASE: battleboat
@@ -34,6 +34,7 @@ services:
       - game
       
 volumes:
-  mysql_config:
+  mysql_data: {}
+
 networks:
-  game:
+  game: {}

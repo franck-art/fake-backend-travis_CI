@@ -6,12 +6,6 @@ IMAGE =  franckjunior/fake-backend:travis
 
 # Regles
 
-reseau: 
-	docker network create  network_game
-
-volume:
-	docker volume create mysql_data
-
 
 image:
 	docker build -t $(IMAGE) ./fake-backend
