@@ -15,17 +15,17 @@ run:
 	docker-compose up -d
         # To let the container start before run test
 	sleep 5s
-	docker ps 
+	docker ps
+	ip add 
 test:
 
 	if [ "$$(curl -X GET http://localhost:80/health)" = "ok" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
 	echo "fin test"
 
 clean:
-	docker rm -vf  battlegame dbgame
-	docker-compose down -d
+	docker-compose down 
 
 push-image:
 	docker push $(IMAGE)
 
-.PHONY: volume reseau image run test clean push-image
+.PHONY: image run test clean push-image

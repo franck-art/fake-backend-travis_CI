@@ -22,7 +22,7 @@ services:
     depends_on:
       - dbgame
     ports:
-      - 80:3000
+      - 8282:3000
     environment:
       DATABASE_HOST: dbgame
       DATABASE_PORT: 3306
@@ -35,8 +35,8 @@ services:
       
 volumes:
   mysql_data: 
-    external: false
+    
 
 networks:
   game:
-    external: false
+    
