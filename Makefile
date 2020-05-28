@@ -2,7 +2,7 @@
 # en regles et appliquer les actions sur les cibles
 # declaration de variables
 
-hostip = "ip route show | awk '/default/ {print $3}'"
+hostip = echo `ip route show | awk '/default/ {print $3}'`
 IMAGE =  franckjunior/fake-backend:travis
 
 # Regles
