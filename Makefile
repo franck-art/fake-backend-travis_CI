@@ -19,13 +19,16 @@ run:
 	ip add 
 test:
 
-	if [ "$$(curl -X GET http://localhost:80/health)" = "ok" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -X GET http://127.0.0.1:8282/health)" = "ok" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
 	echo "fin test"
+
+
+push-image:
+        docker push $(IMAGE)
+
 
 clean:
 	docker-compose down 
 
-push-image:
-	docker push $(IMAGE)
 
 .PHONY: image run test clean push-image
