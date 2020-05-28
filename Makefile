@@ -21,7 +21,7 @@ run:
 
 test:
 	
-	if [ "$$(curl -X GET http://$(ip route show | awk '/default/ {print $3}'):8282/health)" = "ok" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -X GET http://172.18.0.1:8282/health)" = "ok" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
 	echo "fin test"
 
 
