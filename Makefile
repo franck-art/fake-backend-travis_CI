@@ -19,9 +19,9 @@ run:
 	ip add 
 test:
 	
-	hostip=$(ip route show | awk '/default/ {print $3}')
-	echo $hostip
-	if [ "$$(curl -X GET http://$hostip:8282/health)" = "ok" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
+	hostip=echo `ip route show | awk '/default/ {print $3}'`
+	echo $(hostip)
+	if [ "$$(curl -X GET http://$(hostip):8282/health)" = "ok" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
 	echo "fin test"
 
 
