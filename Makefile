@@ -2,7 +2,7 @@
 # en regles et appliquer les actions sur les cibles
 # declaration de variables
 
-hostip = echo `ip route show | awk '/default/ {print $3}'`
+
 IMAGE =  franckjunior/fake-backend:travis
 
 # Regles
@@ -21,7 +21,7 @@ run:
 
 test:
 	
-	if [ "$$(curl -X GET http://$(hostip):8282/health)" = "ok" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
+	if [ "$$(curl -X GET http://$(ip route show | awk '/default/ {print $3}'):8282/health)" = "ok" ]; then echo "test OK"; exit 0; else echo "test KO"; exit 1; fi
 	echo "fin test"
 
 
